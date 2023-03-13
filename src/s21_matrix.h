@@ -3,9 +3,11 @@
 
 #include "math.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 #define SUCCESS 1
 #define FAILURE 0
+
 
 typedef struct matrix_struct {
     double **matrix;
@@ -28,6 +30,10 @@ int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
-
+//other functions
+int els_cmp(double a, double b);
+int is_eq_size(matrix_t* a, matrix_t* b);
+int is_null(matrix_t* M);
+void mats_print(int num, ...);
 
 #endif  // SRC_S21_MATRIX_H
