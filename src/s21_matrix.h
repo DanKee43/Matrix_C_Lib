@@ -34,6 +34,7 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 int els_cmp(double a, double b);
 int is_eq_size(matrix_t* a, matrix_t* b);
 int is_null(matrix_t* M);
+double mult_vects(double* vec1, double** mat, int ind, int size);
 void mats_print(int num, ...);
 
 #endif  // SRC_S21_MATRIX_H

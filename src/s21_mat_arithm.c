@@ -26,9 +26,9 @@ int s21_eq_matrix(matrix_t *A, matrix_t *B) {
 
 int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
-    int res_code = 0;
+    int res_code;
 
-    if(is_null(A) && is_null(B)) {
+    if(is_null(A) || is_null(B)) {
         res_code = 1;
     } else if (A->rows != B->rows || A->columns != B->columns) {
         res_code = 2;
@@ -50,9 +50,9 @@ int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
 int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
-    int res_code = 0;
+    int res_code;
 
-    if(is_null(A) && is_null(B)) {
+    if(is_null(A) || is_null(B)) {
         res_code = 1;
     } else if (A->rows != B->rows || A->columns != B->columns) {
         res_code = 2;
@@ -74,12 +74,10 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
 int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
 
-    int res_code = 0;
+    int res_code;
 
-    if(is_null(A) && is_null(B)) {
+    if(is_null(A)) {
         res_code = 1;
-    } else if (A->rows != B->rows || A->columns != B->columns) {
-        res_code = 2;
     } else {
         res_code = s21_create_matrix(A->rows, A->columns, result);
         if (!res_code) {
@@ -89,24 +87,28 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
                 }
             }
         }
-
     }
-
     return res_code;
 }
 
 
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
-    int res_code = 0;
-    if (is_null(A) && is_null(B)) {
+    int res_code;
+    if (is_null(A) || is_null(B)) {
         res_code = 1;
     } else if (A->columns != B->rows) {
         res_code = 2;
     } else {
-        s21_create_matrix(A->rows, B->columns, result);
-
+        res_code = s21_create_matrix(A->rows, B->columns, result);
+        for (int i = 0; i < A->rows; ++i) {
+            for (int j = 0; j < B->columns; ++j) {
+                result->matrix[i][j] = mult_vects(A->matrix[i], B->matrix, j, A->columns);
+            }
+        }
 
 
     }
+
+    return res_code;
 }
