@@ -2,7 +2,7 @@
 #include <stdarg.h>
 
 int els_cmp(double a, double b) {
-    return fabs(a-b) < 0.00000001;
+    return fabs(a-b) < EPS;
 }
 
 int is_eq_size(matrix_t* a, matrix_t* b) {
@@ -24,7 +24,7 @@ void mats_print(int num, ...) {
 
         for (int i = 0; i < next->rows; ++i) {
             for (int j = 0; j < next->columns; ++j) {
-                printf("%.4lf ", next->matrix[i][j]);
+                printf("%.7lf ", next->matrix[i][j]);
             }
             printf("\n");
         }
@@ -48,4 +48,21 @@ double mult_vects(double* vec1, double** mat, int ind, int size) {
     }
 
     return res;
+}
+
+void getMinor(matrix_t* A, int size, int col, matrix_t* B) {
+    int row_shift = 0;
+    int col_shift = 0;
+    for(int i = 0; i < size-1; i++) {
+        if(i == 0) {
+            row_shift = 1;
+        }
+        col_shift = 0;
+        for(int j = 0; j < size-1; j++) {
+            if(j == col) {
+                col_shift = 1;
+            }
+            B->matrix[i][j] = A->matrix[i + row_shift][j + col_shift];
+        }
+    }
 }

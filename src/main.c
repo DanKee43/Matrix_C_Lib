@@ -4,22 +4,25 @@
 int main() {
 
     matrix_t A;
-    s21_create_matrix(3, 2, &A);
-//    A.matrix[0][0] = 1.0;
-//    A.matrix[1][0] = 2.0;
-//    A.matrix[0][1] = 3.0;
-//    A.matrix[1][1] = 4.0000002;
-      A.matrix[0][0] = 1;
-    A.matrix[0][1] = 4;
-    A.matrix[1][0] = 2;
-    A.matrix[1][1] = 5;
-    A.matrix[2][0] = 3;
-    A.matrix[2][0] = 6;
+    s21_create_matrix(3, 3, &A);
+    A.matrix[0][0] = 1.0;
+    A.matrix[0][1] = 2.0;
+    A.matrix[0][2] = 3.0;
 
-    matrix_t B;
-    s21_transpose(&A, &B);
+    A.matrix[1][0] = 4.0;
+    A.matrix[1][1] = 5.0;
+    A.matrix[1][2] = 6.0;
+    
+    A.matrix[2][0] = 7.0;
+    A.matrix[2][1] = 8.0;
+    A.matrix[2][2] = 99.5;
 
-    mats_print(2, &A, &B);
+
+    double chislo = 0;
+    mats_print(1, &A);
+    s21_determinant(&A, &chislo);
+    printf("%.7lf\n", chislo);
+
 //
 //    matrix_t B;
 //    s21_create_matrix(2, 2, &B);

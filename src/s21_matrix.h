@@ -1,14 +1,14 @@
 #ifndef SRC_S21_MATRIX_H
 #define SRC_S21_MATRIX_H
 
-#include "math.h"
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #define SUCCESS 1
 #define FAILURE 0
 
-
+#define EPS 0.00000001
 typedef struct matrix_struct {
     double **matrix;
     int rows;
@@ -35,6 +35,8 @@ int els_cmp(double a, double b);
 int is_eq_size(matrix_t* a, matrix_t* b);
 int is_null(matrix_t* M);
 double mult_vects(double* vec1, double** mat, int ind, int size);
+void getMinor(matrix_t* A, int size, int col, matrix_t* B);
+
 void mats_print(int num, ...);
 
 #endif  // SRC_S21_MATRIX_H
